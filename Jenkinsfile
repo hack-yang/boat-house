@@ -1,7 +1,7 @@
 def getHost() {
   def remote = [:]
   remote.name = 'server-dev'
-  remote.host = '138.91.37.88'
+  remote.host = "${env.REMOTE_HOST}"
   remote.user = "${env.CREDS_DEV_SERVER_USR}"
   remote.password = "${env.CREDS_DEV_SERVER_PSW}"
   remote.port = 22
@@ -15,6 +15,7 @@ pipeline {
         label 'vm-slave' 
     }
     environment {
+      REMOTE_HOST = '138.91.37.88'
       DOCKER_REPO_URL = 'docker.pkg.github.com/idcf-boat-house/boat-house'
       CREDS_GITHUB_REGISTRY = credentials('creds-github-registry')
       CREDS_DEV_SERVER = credentials('creds-dev-server')
@@ -131,5 +132,7 @@ pipeline {
             }
         }
     }
+    
+
 
   }
